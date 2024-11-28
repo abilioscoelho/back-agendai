@@ -19,7 +19,7 @@ export default class PatientsController {
       const patient = await Patient.findByOrFail('id', params.id)
       return patient
     } catch (error) {
-      return response.status(400).json({ error: 'Patient not  found' })
+      return response.status(400).json({ error: 'patient not  found' })
     }
   }
 
@@ -31,7 +31,7 @@ export default class PatientsController {
       await patient.save()
       return patient
     } catch (error) {
-      return response.status(400).json({ error: 'Patient not  found' })
+      return response.status(400).json({ error: 'patient not  found' })
     }
   }
 
@@ -41,7 +41,7 @@ export default class PatientsController {
       await patient.delete()
       return response.status(203)
     } catch (error) {
-      return response.status(400).json({ error: 'Patient not  found' })
+      return response.status(400).json({ error: 'patient not  found' })
     }
   }
 }

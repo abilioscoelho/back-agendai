@@ -1,12 +1,12 @@
 import type { HttpContext } from '@adonisjs/core/http'
-import { createCategoryUserValidator } from '#validators/category_user'
+import { createOccupationValidator } from '#validators/occupation'
 import User from '#models/user'
 
-export default class CategoryUsersController {
+export default class OccupationsController {
   async store({ request, response, params }: HttpContext) {
     try {
       const user = await User.findByOrFail('id', params.id)
-      const { ids } = await request.validateUsing(createCategoryUserValidator)
+      const { ids } = await request.validateUsing(createOccupationValidator)
       await user.related('categories').sync(ids)
     } catch (error) {
       console.log(error)

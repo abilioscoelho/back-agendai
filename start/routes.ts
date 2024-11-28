@@ -1,7 +1,7 @@
 const SessionController = () => import('#controllers/session_controller')
 const UserController = () => import('#controllers/users_controller')
 const CategoryController = () => import('#controllers/categories_controller')
-const CategoryUserController = () => import('#controllers/category_users_controller')
+const OccupationController = () => import('#controllers/occupations_controller')
 const PatientController = () => import('#controllers/patients_controller')
 
 import { middleware } from './kernel.js'
@@ -14,7 +14,7 @@ router.delete('/session', [SessionController, 'destroy']).use(middleware.auth())
 
 router.group(() => {
   router.resource('/user', UserController).apiOnly()
-  router.post('/user/:id/category', [CategoryUserController, 'store'])
+  router.post('/user/:id/category', [OccupationController, 'store'])
   router.resource('/category', CategoryController).apiOnly()
   router.resource('/patient', PatientController).apiOnly()
 })
