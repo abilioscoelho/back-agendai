@@ -3,26 +3,17 @@ import User from '#models/user'
 import { createUserValidator, updateUserValidator } from '#validators/user'
 
 export default class UsersController {
-  /**
-   * Display a list of resource
-   */
   async index() {
     const users = await User.all()
     return users
   }
 
-  /**
-   * Handle form submission for the create action
-   */
   async store({ request }: HttpContext) {
     const { name, email, password, profile } = await request.validateUsing(createUserValidator)
     const user = await User.create({ name, email, password, profile })
     return user
   }
 
-  /**
-   * Show individual record
-   */
   async show({ params, response }: HttpContext) {
     try {
       const user = await User.findByOrFail('id', params.id)
@@ -32,9 +23,6 @@ export default class UsersController {
     }
   }
 
-  /**
-   * Handle form submission for the edit action
-   */
   async update({ params, request, response }: HttpContext) {
     try {
       const user = await User.findByOrFail('id', params.id)
@@ -47,9 +35,6 @@ export default class UsersController {
     }
   }
 
-  /**
-   * Delete record
-   */
   async destroy({ params, response }: HttpContext) {
     try {
       const user = await User.findByOrFail('id', params.id)
