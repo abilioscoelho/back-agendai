@@ -11,11 +11,12 @@ export default class Day extends BaseModel {
   declare name: string
 
   @manyToMany(() => User, {
-    pivotTable: 'category_users',
+    pivotTable: 'availabilities',
     localKey: 'id',
-    pivotForeignKey: 'category_id',
+    pivotForeignKey: 'day_id',
     relatedKey: 'id',
     pivotRelatedForeignKey: 'user_id',
+    pivotColumns: ['start', 'end', 'interval'],
   })
   declare users: ManyToMany<typeof User>
 

@@ -4,7 +4,11 @@ import { createDayValidator, updateDayValidator } from '#validators/day'
 
 export default class ServiceDaysController {
   async index() {
-    const days = await Day.query().orderBy('id', 'asc').preload('users')
+    const days = await Day.query()
+      .orderBy('id', 'asc')
+      .preload('users', (query) => {
+        query.pivotColumns(['start', 'end', 'interval'])
+      })
     return days
   }
   async store({ request }: HttpContext) {

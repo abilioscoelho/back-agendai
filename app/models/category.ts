@@ -17,7 +17,7 @@ export default class Category extends BaseModel {
   declare updatedAt: DateTime
 
   @manyToMany(() => User, {
-    pivotTable: 'category_users',
+    pivotTable: 'occupations',
     localKey: 'id',
     pivotForeignKey: 'category_id',
     relatedKey: 'id',

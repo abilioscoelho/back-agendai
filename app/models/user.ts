@@ -39,7 +39,7 @@ export default class User extends compose(BaseModel, AuthFinder) {
   declare updatedAt: DateTime | null
 
   @manyToMany(() => Category, {
-    pivotTable: 'category_users',
+    pivotTable: 'occupations',
     localKey: 'id',
     pivotForeignKey: 'user_id',
     relatedKey: 'id',
@@ -48,13 +48,24 @@ export default class User extends compose(BaseModel, AuthFinder) {
   declare categories: ManyToMany<typeof Category>
 
   @manyToMany(() => Day, {
-    pivotTable: 'occupations',
+    pivotTable: 'availabilities',
     localKey: 'id',
     pivotForeignKey: 'user_id',
     relatedKey: 'id',
     pivotRelatedForeignKey: 'day_id',
+    pivotColumns: ['start', 'end', 'interval'],
   })
   declare days: ManyToMany<typeof Day>
+
+  serializeExtras() {
+    return {
+      availabilities: {
+        start: this.$extras.pivot_start,
+        end: this.$extras.pivot_end,
+        interval: this.$extras.pivot_interval,
+      },
+    }
+  }
 
   static accessTokens = DbAccessTokensProvider.forModel(User)
 }

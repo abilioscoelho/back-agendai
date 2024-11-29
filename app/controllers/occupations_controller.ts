@@ -9,7 +9,6 @@ export default class OccupationsController {
       const { ids } = await request.validateUsing(createOccupationValidator)
       await user.related('categories').sync(ids)
     } catch (error) {
-      console.log(error)
       return response.status(400).json({ error: 'user not  found' })
     }
   }

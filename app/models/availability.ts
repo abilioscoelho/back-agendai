@@ -1,15 +1,24 @@
 import { DateTime } from 'luxon'
 import { BaseModel, column } from '@adonisjs/lucid/orm'
 
-export default class Occupation extends BaseModel {
+export default class Availability extends BaseModel {
   @column({ isPrimary: true })
   declare id: number
+
+  @column()
+  declare start: DateTime
+
+  @column()
+  declare end: DateTime
+
+  @column()
+  declare interval: number
 
   @column()
   declare userId: number
 
   @column()
-  declare categoryId: number
+  declare dayId: number
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime

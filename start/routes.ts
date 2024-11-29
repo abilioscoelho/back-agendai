@@ -18,6 +18,6 @@ router.group(() => {
   router.post('/user/:id/category', [OccupationController, 'store'])
   router.resource('/category', CategoryController).apiOnly()
   router.resource('/patient', PatientController).apiOnly()
-  router.resource('/days', DayController).apiOnly()
+  router.resource('/day', DayController).apiOnly()
 })
 // .use(middleware.auth())
