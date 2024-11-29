@@ -4,8 +4,9 @@ import { compose } from '@adonisjs/core/helpers'
 import { BaseModel, column, manyToMany } from '@adonisjs/lucid/orm'
 import { withAuthFinder } from '@adonisjs/auth/mixins/lucid'
 import { DbAccessTokensProvider } from '@adonisjs/auth/access_tokens'
-import Category from './category.js'
 import { type ManyToMany } from '@adonisjs/lucid/types/relations'
+import Category from './category.js'
+import Day from './day.js'
 
 const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
   uids: ['email'],
@@ -45,6 +46,15 @@ export default class User extends compose(BaseModel, AuthFinder) {
     pivotRelatedForeignKey: 'category_id',
   })
   declare categories: ManyToMany<typeof Category>
+
+  @manyToMany(() => Day, {
+    pivotTable: 'occupations',
+    localKey: 'id',
+    pivotForeignKey: 'user_id',
+    relatedKey: 'id',
+    pivotRelatedForeignKey: 'day_id',
+  })
+  declare days: ManyToMany<typeof Day>
 
   static accessTokens = DbAccessTokensProvider.forModel(User)
 }

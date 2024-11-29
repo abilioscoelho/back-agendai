@@ -9,7 +9,7 @@ export default class CategoryUser extends BaseModel {
   declare userId: number
 
   @column()
-  declare categoryId: number
+  declare dayId: number
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
