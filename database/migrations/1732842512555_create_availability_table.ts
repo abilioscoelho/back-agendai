@@ -6,8 +6,8 @@ export default class extends BaseSchema {
   async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
-      table.dateTime('start').notNullable()
-      table.dateTime('end').notNullable()
+      table.time('start').notNullable()
+      table.time('end').notNullable()
       table.integer('interval').notNullable()
       table
         .integer('user_id')
